@@ -2,7 +2,7 @@
  * API client — full-stack integration (Phases 2–6)
  */
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://attendance-management-system-xm2e.onrender.com';
 
 const Auth = {
   getToken() {
