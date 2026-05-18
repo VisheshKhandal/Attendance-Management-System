@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — Attendance Tracker</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body data-page="profile">
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">AT</div>
+        <span class="sidebar-logo-text">Attendance</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link" data-nav="dashboard"><span class="sidebar-link-icon">📊</span> Dashboard</a>
+        <a href="classes.html" class="sidebar-link" data-nav="classes"><span class="sidebar-link-icon">📚</span> Classes</a>
+        <a href="students.html" class="sidebar-link" data-nav="students"><span class="sidebar-link-icon">👨‍🎓</span> Students</a>
+        <a href="attendance.html" class="sidebar-link" data-nav="attendance"><span class="sidebar-link-icon">✅</span> Attendance</a>
+        <a href="attendance-history.html" class="sidebar-link" data-nav="history"><span class="sidebar-link-icon">📅</span> History</a>
+        <a href="profile.html" class="sidebar-link active" data-nav="profile"><span class="sidebar-link-icon">👤</span> Profile</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" id="logoutLink"><span class="sidebar-link-icon">🚪</span> Logout</a>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+      <header class="navbar">
+        <div class="navbar-left">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+          <h1 class="page-title">Teacher Profile</h1>
+        </div>
+        <div class="navbar-right">
+          <div class="teacher-profile">
+            <div class="teacher-avatar">T</div>
+            <span class="teacher-name">Teacher</span>
+          </div>
+          <a href="#" class="btn btn-ghost btn-sm" data-logout>Logout</a>
+        </div>
+      </header>
+
+      <main class="main-content profile-page page-enter">
+        <div class="profile-container">
+          <div id="profileLoader" class="profile-loader" aria-busy="true" aria-label="Loading profile">
+            <div class="profile-loader-spinner" aria-hidden="true"></div>
+            <p class="profile-loader-text">Loading your profile…</p>
+          </div>
+
+          <div id="profileContent" class="profile-content" hidden>
+            <section class="profile-header card">
+              <div class="profile-header-bg" aria-hidden="true"></div>
+              <div class="profile-header-body">
+                <div class="profile-header-top">
+                  <button type="button" class="profile-avatar-wrap" id="avatarEditTrigger" aria-label="Change profile photo">
+                    <div class="profile-avatar-ring">
+                      <div class="profile-avatar-large" id="profileAvatarLarge">T</div>
+                    </div>
+                    <span class="profile-avatar-hint">Change photo</span>
+                  </button>
+                  <div class="profile-header-info">
+                    <h2 class="profile-display-name" id="profileFullName">—</h2>
+                    <p class="profile-title-line">
+                      <span class="role-badge-inline" id="profileRole">Teacher</span>
+                      <span class="profile-subtitle" id="profileSubtitle">Educator</span>
+                    </p>
+                    <p class="profile-email-line" id="profileEmail">—</p>
+                    <p class="profile-joined-line">Joined <span id="profileJoined">—</span></p>
+                    <p class="profile-summary-line" id="profileSummary">—</p>
+                    <p class="profile-bio-display" id="profileBioDisplay">—</p>
+                  </div>
+                  <div class="profile-header-actions">
+                    <button type="button" class="btn btn-primary btn-sm" id="openEditPanelBtn">Edit profile</button>
+                  </div>
+                </div>
+
+                <div class="profile-completeness card-inner">
+                  <div class="completeness-head">
+                    <span>Profile completeness</span>
+                    <strong id="completenessPercent">0%</strong>
+                  </div>
+                  <div class="completeness-track">
+                    <div class="completeness-fill" id="completenessFill" style="width: 0%"></div>
+                  </div>
+                  <p class="completeness-hint" id="completenessHint">Complete your profile to stand out.</p>
+                </div>
+
+                <div class="profile-quick-stats">
+                  <div class="quick-stat"><span class="quick-stat-value" id="headerStatClasses">0</span><span class="quick-stat-label">Classes</span></div>
+                  <div class="quick-stat"><span class="quick-stat-value" id="headerStatStudents">0</span><span class="quick-stat-label">Students</span></div>
+                  <div class="quick-stat"><span class="quick-stat-value" id="headerStatRate">0%</span><span class="quick-stat-label">Attendance</span></div>
+                  <div class="quick-stat"><span class="quick-stat-value" id="headerStatToday">0</span><span class="quick-stat-label">Today</span></div>
+                </div>
+              </div>
+            </section>
+
+            <div class="profile-body-grid">
+              <div class="profile-col-main">
+                <section class="quick-actions-row">
+                  <a href="classes.html" class="quick-action-card"><span>📚</span><span>Add class</span></a>
+                  <a href="attendance.html" class="quick-action-card"><span>✅</span><span>Mark attendance</span></a>
+                  <a href="attendance-history.html" class="quick-action-card"><span>📅</span><span>View reports</span></a>
+                  <a href="students.html" class="quick-action-card"><span>👨‍🎓</span><span>Manage students</span></a>
+                </section>
+
+                <nav class="profile-tabs" role="tablist" aria-label="Profile sections">
+                  <button type="button" class="profile-tab active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+                  <button type="button" class="profile-tab" data-tab="security" role="tab">Security</button>
+                  <button type="button" class="profile-tab" data-tab="preferences" role="tab">Preferences</button>
+                  <button type="button" class="profile-tab" data-tab="activity" role="tab">Activity</button>
+                </nav>
+
+                <div class="tab-panels-wrap">
+                  <div class="tab-panels">
+                    <section class="tab-panel active card" id="panel-overview" role="tabpanel">
+                      <h3 class="card-title">Account overview</h3>
+                      <p class="text-secondary panel-desc">Your information at a glance. Click Edit profile to make changes.</p>
+                      <dl class="info-grid" id="overviewInfoGrid"></dl>
+                    </section>
+
+                    <section class="tab-panel card" id="panel-security" role="tabpanel" hidden>
+                      <h3 class="card-title">Security center</h3>
+                      <p class="text-secondary panel-desc">Sensitive controls stay collapsed until you open them.</p>
+
+                      <div class="security-accordions">
+                        <div class="security-accordion" data-accordion>
+                          <button type="button" class="security-accordion-trigger" aria-expanded="false">
+                            <span class="security-accordion-chevron" aria-hidden="true">▶</span>
+                            <span class="security-accordion-label">Change password</span>
+                            <span class="security-accordion-hint">Verify identity to update</span>
+                          </button>
+                          <div class="security-accordion-panel" hidden>
+                            <p class="security-panel-note">Enter your <strong>current password</strong> to confirm it is really you.</p>
+                            <form id="passwordForm" class="security-form">
+                              <div class="form-group">
+                                <label class="form-label" for="currentPassword">Current password</label>
+                                <input type="password" id="currentPassword" class="form-input" autocomplete="current-password" required placeholder="Required to continue">
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label" for="newPassword">New password</label>
+                                <input type="password" id="newPassword" class="form-input" minlength="8" autocomplete="new-password" required>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label" for="confirmPassword">Confirm new password</label>
+                                <input type="password" id="confirmPassword" class="form-input" minlength="8" autocomplete="new-password" required>
+                              </div>
+                              <button type="submit" class="btn btn-primary" id="changePasswordBtn">Update password</button>
+                            </form>
+                          </div>
+                        </div>
+
+                        <div class="security-accordion" data-accordion>
+                          <button type="button" class="security-accordion-trigger" aria-expanded="false">
+                            <span class="security-accordion-chevron" aria-hidden="true">▶</span>
+                            <span class="security-accordion-label">Session management</span>
+                          </button>
+                          <div class="security-accordion-panel" hidden>
+                            <ul class="session-list" id="sessionList"></ul>
+                            <button type="button" class="btn btn-secondary btn-sm" id="logoutAllBtn">Log out all other devices</button>
+                          </div>
+                        </div>
+
+                        <div class="security-accordion" data-accordion>
+                          <button type="button" class="security-accordion-trigger" aria-expanded="false">
+                            <span class="security-accordion-chevron" aria-hidden="true">▶</span>
+                            <span class="security-accordion-label">Login activity</span>
+                          </button>
+                          <div class="security-accordion-panel" hidden>
+                            <ul class="login-history-list" id="loginHistoryList"></ul>
+                          </div>
+                        </div>
+
+                        <div class="security-accordion" data-accordion>
+                          <button type="button" class="security-accordion-trigger" aria-expanded="false">
+                            <span class="security-accordion-chevron" aria-hidden="true">▶</span>
+                            <span class="security-accordion-label">Two-factor authentication</span>
+                            <span class="security-accordion-badge" id="twoFactorBadge">Off</span>
+                          </button>
+                          <div class="security-accordion-panel" hidden>
+                            <p class="text-secondary security-2fa-desc">Extra sign-in protection. Demo toggle — full OTP can be added later.</p>
+                            <div class="pref-row security-2fa-row">
+                              <div>
+                                <strong>Enable 2FA</strong>
+                                <p class="text-muted">Require a code when signing in</p>
+                              </div>
+                              <label class="theme-toggle">
+                                <input type="checkbox" id="twoFactorToggle">
+                                <span class="theme-toggle-slider"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section class="tab-panel card" id="panel-preferences" role="tabpanel" hidden>
+                      <h3 class="card-title">Preferences</h3>
+                      <p class="text-secondary panel-desc">Personalize appearance and attendance workflow.</p>
+
+                      <h4 class="pref-section-title">Appearance</h4>
+                      <div class="pref-row">
+                        <div>
+                          <strong>Theme</strong>
+                          <p class="text-muted">Dark or light mode</p>
+                        </div>
+                        <label class="theme-toggle">
+                          <input type="checkbox" id="themeToggle">
+                          <span class="theme-toggle-slider"></span>
+                          <span class="theme-toggle-label" id="themeLabel">Dark</span>
+                        </label>
+                      </div>
+                      <div class="pref-row">
+                        <div>
+                          <strong>Accent color</strong>
+                          <p class="text-muted">Highlight color across the app</p>
+                        </div>
+                        <div class="accent-swatches" id="accentSwatches">
+                          <button type="button" class="accent-swatch active" data-accent="blue" aria-label="Blue accent" style="--swatch:#2563eb"></button>
+                          <button type="button" class="accent-swatch" data-accent="violet" aria-label="Violet accent" style="--swatch:#7c3aed"></button>
+                          <button type="button" class="accent-swatch" data-accent="teal" aria-label="Teal accent" style="--swatch:#0d9488"></button>
+                          <button type="button" class="accent-swatch" data-accent="amber" aria-label="Amber accent" style="--swatch:#d97706"></button>
+                        </div>
+                      </div>
+                      <div class="pref-row">
+                        <div>
+                          <strong>Compact sidebar</strong>
+                          <p class="text-muted">Collapsed sidebar on desktop</p>
+                        </div>
+                        <label class="theme-toggle">
+                          <input type="checkbox" id="compactSidebarPref">
+                          <span class="theme-toggle-slider"></span>
+                        </label>
+                      </div>
+
+                      <h4 class="pref-section-title">Attendance</h4>
+                      <div class="pref-row">
+                        <div>
+                          <strong>Default attendance mode</strong>
+                          <p class="text-muted">How you usually mark class</p>
+                        </div>
+                        <select id="attPrefDefaultMode" class="form-input pref-select">
+                          <option value="present">Present-first</option>
+                          <option value="absent">Absent-first</option>
+                        </select>
+                      </div>
+                      <div class="pref-row">
+                        <div>
+                          <strong>Allow editing past attendance</strong>
+                        </div>
+                        <label class="theme-toggle">
+                          <input type="checkbox" id="attPrefEditPast">
+                          <span class="theme-toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="pref-row">
+                        <div>
+                          <strong>Auto-save attendance</strong>
+                        </div>
+                        <label class="theme-toggle">
+                          <input type="checkbox" id="attPrefAutoSave" checked>
+                          <span class="theme-toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="pref-row">
+                        <div>
+                          <strong>Confirmation before submit</strong>
+                        </div>
+                        <label class="theme-toggle">
+                          <input type="checkbox" id="attPrefConfirmPopup" checked>
+                          <span class="theme-toggle-slider"></span>
+                        </label>
+                      </div>
+                    </section>
+
+                    <section class="tab-panel card" id="panel-activity" role="tabpanel" hidden>
+                      <h3 class="card-title">Recent activity</h3>
+                      <p class="text-secondary panel-desc">Timestamped actions across your account and classes.</p>
+                      <div class="activity-toolbar">
+                        <button type="button" class="activity-filter active" data-activity-filter="all">All</button>
+                        <button type="button" class="activity-filter" data-activity-filter="account">Account</button>
+                        <button type="button" class="activity-filter" data-activity-filter="teaching">Teaching</button>
+                      </div>
+                      <div class="activity-feed-scroll">
+                        <ul class="activity-feed" id="activityFeed"></ul>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="profile-col-aside" aria-label="Profile sidebar">
+                <article class="profile-aside-card profile-aside-identity card">
+                  <div class="aside-identity-top">
+                    <div class="aside-mini-avatar teacher-avatar" id="asideMiniAvatar">T</div>
+                    <div class="aside-identity-text">
+                      <p class="aside-mini-name" id="asideMiniName">—</p>
+                      <p class="aside-mini-role" id="asideMiniRole">Teacher</p>
+                    </div>
+                  </div>
+                  <div class="aside-completeness">
+                    <div class="aside-ring-wrap" aria-hidden="true">
+                      <svg class="aside-ring-svg" viewBox="0 0 36 36">
+                        <circle class="aside-ring-bg" cx="18" cy="18" r="15.5" />
+                        <circle class="aside-ring-fill" id="asideRingFill" cx="18" cy="18" r="15.5" />
+                      </svg>
+                      <span class="aside-ring-label" id="asideCompletenessPercent">0%</span>
+                    </div>
+                    <p class="aside-completeness-hint" id="asideCompletenessHint">Complete your profile</p>
+                  </div>
+                </article>
+
+                <article class="profile-aside-card card">
+                  <h3 class="card-title">At a glance</h3>
+                  <ul class="aside-stats" id="asideStatsList">
+                    <li><span>Classes</span><strong id="asideStatClasses">0</strong></li>
+                    <li><span>Students</span><strong id="asideStatStudents">0</strong></li>
+                    <li><span>Attendance</span><strong id="asideStatRate">0%</strong></li>
+                    <li><span>Marked today</span><strong id="asideStatToday">0</strong></li>
+                  </ul>
+                </article>
+
+                <article class="profile-aside-card card">
+                  <h3 class="card-title">Recent activity</h3>
+                  <ul class="activity-feed activity-feed-compact" id="activityPreview"></ul>
+                  <button type="button" class="btn btn-ghost btn-sm profile-aside-link" id="viewAllActivityBtn">View all activity →</button>
+                </article>
+
+                <article class="profile-aside-card card profile-shortcuts">
+                  <h3 class="card-title">Shortcuts</h3>
+                  <button type="button" class="profile-shortcut-btn" data-goto-tab="security">🔒 Security settings</button>
+                  <button type="button" class="profile-shortcut-btn" data-goto-tab="preferences">⚙️ Preferences</button>
+                </article>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="edit-panel-backdrop" id="editPanelBackdrop" hidden></div>
+  <aside class="edit-panel" id="editPanel" aria-label="Edit profile" aria-hidden="true">
+    <header class="edit-panel-header">
+      <h3>Edit profile</h3>
+      <button type="button" class="edit-panel-close" id="closeEditPanelBtn" aria-label="Close">×</button>
+    </header>
+    <div class="edit-panel-body">
+      <form id="profileForm" class="profile-form">
+        <input type="file" id="profileImageInput" accept="image/*" hidden>
+        <div class="edit-avatar-row">
+          <div class="profile-avatar-ring">
+            <div class="profile-avatar-large edit-avatar-preview" id="editAvatarPreview">T</div>
+          </div>
+          <label class="btn btn-secondary btn-sm" for="profileImageInput">Change photo</label>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profileFullNameInput">Full name</label>
+          <input type="text" id="profileFullNameInput" class="form-input" maxlength="80" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profileUsername">Username</label>
+          <input type="text" id="profileUsername" class="form-input" minlength="2" maxlength="64" required>
+          <span class="form-hint">Used for login</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profileEmailInput">Email</label>
+          <input type="email" id="profileEmailInput" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profilePhone">Phone</label>
+          <input type="tel" id="profilePhone" class="form-input" maxlength="20">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profileGender">Gender</label>
+          <select id="profileGender" class="form-input">
+            <option value="">Not specified</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profileAddress">Address</label>
+          <input type="text" id="profileAddress" class="form-input" maxlength="200">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profileBioInput">Bio</label>
+          <textarea id="profileBioInput" class="form-input" rows="4" maxlength="500"></textarea>
+          <span class="form-hint"><span id="bioCharCount">0</span> / 500</span>
+        </div>
+      </form>
+    </div>
+    <footer class="edit-panel-footer" id="editPanelFooter" hidden>
+      <button type="button" class="btn btn-ghost" id="discardEditBtn">Discard</button>
+      <button type="button" class="btn btn-primary" id="saveProfileBtn">Save changes</button>
+    </footer>
+  </aside>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/profile.js"></script>
+</body>
+</html>

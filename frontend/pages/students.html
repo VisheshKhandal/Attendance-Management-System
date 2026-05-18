@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students — Attendance Tracker</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/students.css">
+</head>
+<body data-page="students">
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">AT</div>
+        <span class="sidebar-logo-text">Attendance</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link" data-nav="dashboard">
+          <span class="sidebar-link-icon">📊</span>
+          Dashboard
+        </a>
+        <a href="classes.html" class="sidebar-link" data-nav="classes">
+          <span class="sidebar-link-icon">📚</span>
+          Classes
+        </a>
+        <a href="students.html" class="sidebar-link" data-nav="students">
+          <span class="sidebar-link-icon">👨‍🎓</span>
+          Students
+        </a>
+        <a href="attendance.html" class="sidebar-link" data-nav="attendance">
+          <span class="sidebar-link-icon">✅</span>
+          Attendance
+        </a>
+        <a href="attendance-history.html" class="sidebar-link" data-nav="history">
+          <span class="sidebar-link-icon">📅</span>
+          History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" id="logoutLink">
+          <span class="sidebar-link-icon">🚪</span>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+      <header class="navbar">
+        <div class="navbar-left">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+          <h1 class="page-title">Students</h1>
+        </div>
+        <div class="navbar-right">
+          <div class="teacher-profile">
+            <div class="teacher-avatar">V</div>
+            <span class="teacher-name">Vishesh</span>
+          </div>
+          <a href="#" class="btn btn-ghost btn-sm" data-logout>Logout</a>
+        </div>
+      </header>
+
+      <main class="main-content page-enter">
+        <div class="page-header">
+          <div>
+            <h2>Students</h2>
+            <p class="text-secondary">View and manage enrolled students</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="addStudentBtn">+ Add Student</button>
+        </div>
+
+        <div class="search-bar">
+          <input type="search" id="studentSearch" class="form-input" placeholder="Search students..." aria-label="Search students">
+          <select id="classFilter" class="filter-select" aria-label="Filter by class">
+            <option value="">All Classes</option>
+          </select>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Roll No</th>
+                <th>Class</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="studentsTableBody">
+              <tr><td colspan="5" class="empty-state">Loading students…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="studentModal">
+    <div class="modal" role="dialog" aria-labelledby="studentModalTitle">
+      <div class="card-header">
+        <h3 class="card-title" id="studentModalTitle">Add Student</h3>
+        <button type="button" class="btn btn-ghost btn-sm" id="closeStudentModal" aria-label="Close">✕</button>
+      </div>
+      <form id="studentForm">
+        <div class="form-group">
+          <label class="form-label" for="studentName">Full Name</label>
+          <input type="text" id="studentName" class="form-input" placeholder="Student name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="rollNumber">Roll Number</label>
+          <input type="number" id="rollNumber" class="form-input" placeholder="e.g. 101" min="1" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="studentEmail">Email</label>
+          <input type="email" id="studentEmail" class="form-input" placeholder="student@school.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="studentClass">Class</label>
+          <select id="studentClass" class="form-input" required>
+            <option value="">Select class</option>
+          </select>
+        </div>
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+          <button type="button" class="btn btn-secondary" id="cancelStudentModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/students.js"></script>
+</body>
+</html>

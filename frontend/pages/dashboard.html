@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Attendance Tracker</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body data-page="dashboard">
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">AT</div>
+        <span class="sidebar-logo-text">Attendance</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link active" data-nav="dashboard" data-tooltip="Dashboard">
+          <span class="sidebar-link-icon">📊</span>
+          Dashboard
+        </a>
+        <a href="classes.html" class="sidebar-link" data-nav="classes" data-tooltip="Classes">
+          <span class="sidebar-link-icon">📚</span>
+          Classes
+        </a>
+        <a href="students.html" class="sidebar-link" data-nav="students" data-tooltip="Students">
+          <span class="sidebar-link-icon">👨‍🎓</span>
+          Students
+        </a>
+        <a href="attendance.html" class="sidebar-link" data-nav="attendance" data-tooltip="Attendance">
+          <span class="sidebar-link-icon">✅</span>
+          Attendance
+        </a>
+        <a href="attendance-history.html" class="sidebar-link" data-nav="history" data-tooltip="History">
+          <span class="sidebar-link-icon">📅</span>
+          History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" id="logoutLink" data-tooltip="Logout">
+          <span class="sidebar-link-icon">🚪</span>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+      <header class="navbar">
+        <div class="navbar-left">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+          <h1 class="page-title" id="navbarPageTitle">Dashboard</h1>
+        </div>
+        <div class="navbar-right">
+          <div class="teacher-profile">
+            <div class="teacher-avatar" id="teacherAvatar">V</div>
+            <span class="teacher-name" id="teacherName">Teacher</span>
+          </div>
+          <a href="#" class="btn btn-ghost btn-sm" data-logout>Logout</a>
+        </div>
+      </header>
+
+      <main class="main-content dashboard-page page-enter">
+        <div class="dashboard-container">
+          <section class="dashboard-hero">
+            <div class="dashboard-hero-glow" aria-hidden="true"></div>
+            <div class="dashboard-hero-content">
+              <div class="hero-meta">
+                <span class="hero-date" id="heroDate">—</span>
+                <span class="hero-clock" id="heroClock">—</span>
+                <span class="live-pill"><span class="live-dot"></span> Live</span>
+              </div>
+              <h2 class="hero-greeting" id="heroGreeting">Welcome back 👋</h2>
+              <p class="hero-insight" id="heroInsight">Loading your dashboard…</p>
+              <p class="hero-trend" id="heroTrend" hidden></p>
+            </div>
+          </section>
+
+          <div class="dashboard-layout">
+            <div class="dashboard-main">
+              <section class="stats-grid" id="statsGrid">
+                <article class="stat-card" data-stat="classes">
+                  <div class="stat-icon blue">📚</div>
+                  <div class="stat-info">
+                    <p class="stat-label">Total Classes</p>
+                    <p class="stat-value" id="statClasses" data-count="0">0</p>
+                    <p class="stat-change live-indicator"><span class="pulse-dot"></span> Synced live</p>
+                  </div>
+                </article>
+                <article class="stat-card" data-stat="students">
+                  <div class="stat-icon green">👨‍🎓</div>
+                  <div class="stat-info">
+                    <p class="stat-label">Total Students</p>
+                    <p class="stat-value" id="statStudents" data-count="0">0</p>
+                    <p class="stat-change live-indicator"><span class="pulse-dot"></span> Synced live</p>
+                  </div>
+                </article>
+                <article class="stat-card" data-stat="today">
+                  <div class="stat-icon purple">✅</div>
+                  <div class="stat-info">
+                    <p class="stat-label">Marked Today</p>
+                    <p class="stat-value" id="statToday" data-count="0">0</p>
+                    <p class="stat-change live-indicator"><span class="pulse-dot"></span> Synced live</p>
+                  </div>
+                </article>
+                <article class="stat-card" data-stat="percentage">
+                  <div class="stat-icon orange">📈</div>
+                  <div class="stat-info">
+                    <p class="stat-label">Attendance Rate</p>
+                    <p class="stat-value" id="statPercentage" data-count="0" data-suffix="%">0%</p>
+                    <p class="stat-change live-indicator"><span class="pulse-dot"></span> Synced live</p>
+                  </div>
+                </article>
+              </section>
+
+              <section class="charts-section" id="chartsSection">
+                <article class="card chart-card chart-card-wide">
+                  <h3 class="card-title">Weekly attendance trend</h3>
+                  <div class="line-chart-wrap" id="weeklyLineChart" aria-label="Weekly line chart"></div>
+                </article>
+
+                <article class="card chart-card">
+                  <h3 class="card-title">Attendance heatmap</h3>
+                  <p class="chart-subtitle">Last 12 weeks of activity</p>
+                  <div class="heatmap-wrap" id="attendanceHeatmap" aria-label="Attendance heatmap"></div>
+                </article>
+
+                <article class="card chart-card">
+                  <h3 class="card-title">Class comparison</h3>
+                  <div class="class-compare-list" id="classCompareChart"></div>
+                </article>
+
+                <article class="card chart-card">
+                  <h3 class="card-title">Present vs absent</h3>
+                  <div class="pie-chart-wrap" id="distributionPie" aria-label="Distribution pie chart"></div>
+                </article>
+              </section>
+
+              <section class="timeline-section">
+                <div class="card timeline-card">
+                  <div class="card-header timeline-header">
+                    <h3 class="card-title">Live activity timeline</h3>
+                    <button type="button" class="btn btn-ghost btn-sm" id="refreshDashboardBtn" title="Refresh">↻ Refresh</button>
+                  </div>
+                  <ul class="timeline-feed" id="activityTimeline"></ul>
+                </div>
+              </section>
+            </div>
+
+            <aside class="dashboard-aside" aria-label="Dashboard widgets">
+              <article class="widget-card card">
+                <h3 class="widget-title">Today's summary</h3>
+                <ul class="summary-list" id="todaySummary">
+                  <li><span class="summary-dot present"></span> Present <strong id="summaryPresent">0</strong></li>
+                  <li><span class="summary-dot absent"></span> Absent <strong id="summaryAbsent">0</strong></li>
+                  <li><span class="summary-dot marked"></span> Marked <strong id="summaryMarked">0</strong></li>
+                </ul>
+              </article>
+
+              <article class="widget-card card health-widget" id="healthWidget">
+                <h3 class="widget-title">Attendance health</h3>
+                <div class="health-badge" id="healthBadge">—</div>
+                <div class="health-bar-track">
+                  <div class="health-bar-fill" id="healthBarFill" style="width: 0%"></div>
+                </div>
+                <p class="health-percent" id="healthPercent">0% overall</p>
+              </article>
+
+              <article class="widget-card card">
+                <h3 class="widget-title">Quick actions</h3>
+                <div class="quick-actions-widget">
+                  <a href="students.html" class="widget-action-btn">+ Add student</a>
+                  <a href="attendance.html" class="widget-action-btn primary">✓ Mark attendance</a>
+                  <a href="attendance-history.html" class="widget-action-btn">📅 View reports</a>
+                </div>
+              </article>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

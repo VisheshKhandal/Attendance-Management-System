@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance History — Attendance Tracker</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/attendance.css">
+</head>
+<body data-page="history">
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">AT</div>
+        <span class="sidebar-logo-text">Attendance</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link" data-nav="dashboard">
+          <span class="sidebar-link-icon">📊</span>
+          Dashboard
+        </a>
+        <a href="classes.html" class="sidebar-link" data-nav="classes">
+          <span class="sidebar-link-icon">📚</span>
+          Classes
+        </a>
+        <a href="students.html" class="sidebar-link" data-nav="students">
+          <span class="sidebar-link-icon">👨‍🎓</span>
+          Students
+        </a>
+        <a href="attendance.html" class="sidebar-link" data-nav="attendance">
+          <span class="sidebar-link-icon">✅</span>
+          Attendance
+        </a>
+        <a href="attendance-history.html" class="sidebar-link" data-nav="history">
+          <span class="sidebar-link-icon">📅</span>
+          History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" id="logoutLink">
+          <span class="sidebar-link-icon">🚪</span>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+      <header class="navbar">
+        <div class="navbar-left">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+          <h1 class="page-title">Attendance History</h1>
+        </div>
+        <div class="navbar-right">
+          <div class="teacher-profile">
+            <div class="teacher-avatar">V</div>
+            <span class="teacher-name">Vishesh</span>
+          </div>
+          <a href="#" class="btn btn-ghost btn-sm" data-logout>Logout</a>
+        </div>
+      </header>
+
+      <main class="main-content page-enter">
+        <div class="history-filters">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="historyClass">Class</label>
+            <select id="historyClass" class="form-input">
+              <option value="">Select class</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="historyStudent">Student</label>
+            <select id="historyStudent" class="form-input" disabled>
+              <option value="">All students</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="historyFrom">From</label>
+            <input type="date" id="historyFrom" class="form-input">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="historyTo">To</label>
+            <input type="date" id="historyTo" class="form-input">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="historyStatus">Status</label>
+            <select id="historyStatus" class="form-input">
+              <option value="">All</option>
+              <option value="Present">Present</option>
+              <option value="Absent">Absent</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0; display: flex; align-items: flex-end;">
+            <button type="button" class="btn btn-secondary btn-block" id="historyFilterBtn">Filter</button>
+          </div>
+        </div>
+
+        <div class="summary-row">
+          <div class="summary-pill present">
+            <p class="label">Present</p>
+            <p class="value">—</p>
+          </div>
+          <div class="summary-pill absent">
+            <p class="label">Absent</p>
+            <p class="value">—</p>
+          </div>
+          <div class="summary-pill rate">
+            <p class="label">Rate</p>
+            <p class="value">—</p>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Class</th>
+                <th>Present</th>
+                <th>Absent</th>
+                <th>Rate</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/attendance.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes — Attendance Tracker</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/classes.css">
+</head>
+<body data-page="classes">
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">AT</div>
+        <span class="sidebar-logo-text">Attendance</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link" data-nav="dashboard">
+          <span class="sidebar-link-icon">📊</span>
+          Dashboard
+        </a>
+        <a href="classes.html" class="sidebar-link" data-nav="classes">
+          <span class="sidebar-link-icon">📚</span>
+          Classes
+        </a>
+        <a href="students.html" class="sidebar-link" data-nav="students">
+          <span class="sidebar-link-icon">👨‍🎓</span>
+          Students
+        </a>
+        <a href="attendance.html" class="sidebar-link" data-nav="attendance">
+          <span class="sidebar-link-icon">✅</span>
+          Attendance
+        </a>
+        <a href="attendance-history.html" class="sidebar-link" data-nav="history">
+          <span class="sidebar-link-icon">📅</span>
+          History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" id="logoutLink">
+          <span class="sidebar-link-icon">🚪</span>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+    <div class="main-wrapper">
+      <header class="navbar">
+        <div class="navbar-left">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+          <h1 class="page-title">Classes</h1>
+        </div>
+        <div class="navbar-right">
+          <div class="teacher-profile">
+            <div class="teacher-avatar">V</div>
+            <span class="teacher-name">Vishesh</span>
+          </div>
+          <a href="#" class="btn btn-ghost btn-sm" data-logout>Logout</a>
+        </div>
+      </header>
+
+      <main class="main-content page-enter">
+        <div class="page-header">
+          <div>
+            <h2>Your Classes</h2>
+            <p class="text-secondary">Manage all classes in one place</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="addClassBtn">+ Add Class</button>
+        </div>
+
+        <div class="classes-grid" id="classesGrid">
+          <article class="class-card">
+            <div class="class-card-header">
+              <h3 class="class-name">Class 10-A</h3>
+              <span class="badge badge-success">Active</span>
+            </div>
+            <p class="class-meta">32 students · Mon–Fri</p>
+            <div class="class-actions">
+              <button type="button" class="btn btn-secondary btn-sm">Edit</button>
+              <button type="button" class="btn btn-ghost btn-sm">View</button>
+            </div>
+          </article>
+          <article class="class-card">
+            <div class="class-card-header">
+              <h3 class="class-name">Class 9-B</h3>
+              <span class="badge badge-success">Active</span>
+            </div>
+            <p class="class-meta">28 students · Mon–Fri</p>
+            <div class="class-actions">
+              <button type="button" class="btn btn-secondary btn-sm">Edit</button>
+              <button type="button" class="btn btn-ghost btn-sm">View</button>
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="classModal">
+    <div class="modal" role="dialog" aria-labelledby="classModalTitle">
+      <div class="card-header">
+        <h3 class="card-title" id="classModalTitle">Add New Class</h3>
+        <button type="button" class="btn btn-ghost btn-sm" id="closeClassModal" aria-label="Close">✕</button>
+      </div>
+      <form id="classForm">
+        <div class="form-group">
+          <label class="form-label" for="className">Class Name</label>
+          <input type="text" id="className" class="form-input" placeholder="e.g. Class 10-A" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="classSection">Section</label>
+          <input type="text" id="classSection" class="form-input" placeholder="e.g. A" required>
+        </div>
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+          <button type="button" class="btn btn-secondary" id="cancelClassModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Class</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/classes.js"></script>
+</body>
+</html>
