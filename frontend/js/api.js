@@ -2,7 +2,12 @@
  * API client — full-stack integration (Phases 2–6)
  */
 
+<<<<<<< HEAD
 const API_BASE_URL = 'https://attendance-management-system-xm2e.onrender.com';
+=======
+//const API_BASE_URL = 'http://locahttps://attendance-management-system-xm2e.onrender.comlhost:5000/api';
+const API_BASE_URL = 'https://attendance-management-system-xm2e.onrender.com/api';
+>>>>>>> 55b92ce (Frontend deployment ready)
 
 const Auth = {
   getToken() {
@@ -105,7 +110,7 @@ const API = {
       response = await fetch(`${API_BASE_URL}${endpoint}`, config);
     } catch {
       throw new ApiClientError(
-        'Cannot reach server. Start the backend with npm run dev in the backend folder.',
+        'Backend server is waking up. Please wait a few seconds and try again.',
         0
       );
     }
