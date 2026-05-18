@@ -11,9 +11,14 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.get('/', (req, res) => {
+  res.send('AMS Backend API is running successfully 🚀');
+});
 
 app.get('/test', (req, res) => {
   res.json({
@@ -21,6 +26,7 @@ app.get('/test', (req, res) => {
     message: 'Student Attendance Tracker API is running',
   });
 });
+
 // Route Mounting - All the routes are mounted here like /api/auth, /api/users, /api/courses, etc.
 app.use('/api', apiRoutes);
 
