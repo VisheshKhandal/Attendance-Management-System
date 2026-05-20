@@ -8,18 +8,27 @@
   <link rel="stylesheet" href="../css/auth.css">
 </head>
 <body data-page="login">
+  // Multiple classes separated by spaces.
   <main class="auth-page page-enter">
+// auth-container: Usually responsible for centering content, spacing, width control, etc.
+/** 
+The <div> tag is one of the most widely used HTML elements, helping divide a webpage into clear, structured sections. 
+  It acts as a flexible container for text, images, and links, easily styled and customized with CSS.
+*/
     <div class="auth-container">
+// auth-card: Usually responsible for shadow, rounded corners, padding, etc. 
       <div class="auth-card">
         <div class="auth-header">
           <div class="auth-logo">AT</div>
           <h1 class="auth-title">Welcome back</h1>
           <p class="auth-subtitle">Sign in to manage your classes and attendance</p>
         </div>
-
+<!-- auth-error: Usually responsible for error messages, validation errors, etc. -->
         <p id="authError" class="auth-error" hidden></p>
+ <!-- novalidate : Browser has default validation. If you want to disable it, use novalidate. -->
         <form id="loginForm" novalidate>
           <div class="form-group">
+            <!-- form-label: Usually responsible for label text, font size, font weight, color, margin bottom, etc. -->
             <label class="form-label" for="email">Email</label>
             <input
               type="email"
@@ -44,7 +53,16 @@
               required
             >
           </div>
-
+          // "btn btn-primary btn-block btn-lg" : This is reusable design system.This is scalable CSS architecture.
+          <!-- 
+          Example Thinking
+          Class      Purpose
+          ----------  ------------------------------------------------------------
+          btn	    - base button styles
+          btn-primary	- blue color
+          btn-block	- full width
+          btn-lg	  large size
+          -->
           <button type="submit" class="btn btn-primary btn-block btn-lg">
             Sign in
           </button>
